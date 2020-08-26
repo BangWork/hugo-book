@@ -377,19 +377,7 @@ nav.fixed{
     z-index:3;
     background:#fff;
   }
-  .book-search-header{
-    height:80px;
-    align-items: center;
-    margin-bottom:$padding-16;
-    padding: 0 11px;
-    z-index: 1;
-    position: relative;
-    box-shadow: 0 3px 8px 0 rgba(116, 129, 141, 0.1);
-    border-bottom: 1px solid #d4dadf;
-    background-color: #FFFFFF;
-    color:$gray-600;
-    display:flex;
-  }
+  
   .book-input-wrapper{
     flex: 1 1 auto;
     width:initial;
@@ -413,6 +401,19 @@ nav.fixed{
   small {
     opacity: 0.5;
   }
+}
+.book-search-header{
+  height:80px;
+  align-items: center;
+  margin-bottom:$padding-16;
+  padding: 0 11px;
+  z-index: 1;
+  position: relative;
+  box-shadow: 0 3px 8px 0 rgba(116, 129, 141, 0.1);
+  border-bottom: 1px solid #d4dadf;
+  background-color: #FFFFFF;
+  color:$gray-600;
+  display:flex;
 }
 .book-search-input{
   padding: $padding-8;

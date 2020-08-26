@@ -8,75 +8,104 @@
 
 <body dir={{ .Site.Language.LanguageDirection }}>
   <input type="checkbox" class="hidden toggle" id="menu-control" />
-  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <input type="checkbox" class="toggle" id="search-control" />
   <main class="container flex">
-    <aside class="book-menu">
-      {{ template "menu" . }} <!-- Left menu Content -->
-    </aside>
+    <label for="menu-control" class="hidden book-overlay book-menu-overlay"></label>
+    <label for="search-control" class="hidden book-overlay book-search-overlay"></label>
+    <header class="book-header">
+      {{ template "header" . }}
+      <!-- Mobile layout header -->
+    </header>
 
-    <div class="book-page">
-      <header class="book-header">
-        {{ template "header" . }} <!-- Mobile layout header -->
-      </header>
+    <div class="book-main flex">
+      <aside class="book-menu">
+        {{ template "menu" . }}
+        <!-- Left menu Content -->
+      </aside>
 
-      {{ partial "docs/inject/content-before" . }}
-      {{ template "main" . }} <!-- Page Content -->
-      {{ partial "docs/inject/content-after" . }}
+      <div class="book-page">
+        <div class="book-page-header">
+          <div class="book-page-title-container">
+            <div class="book-page-title">
+              <h1>{{ partial "docs/title" . }}</h1>
+            </div>
+            <label for="toc-control">
+              {{ if default true (default .Site.Params.BookToC .Params.BookToC) }}
+              <span class="book-icon-wrapper">
+                {{partial "svgs/toc.svg" .}}
+              </span>
+              {{ end }}
+            </label>
+            {{ if default true (default .Site.Params.BookToC .Params.BookToC) }}
+            <aside id="tocPopover" class="hidden clearfix">
+              {{ template "toc" . }}
+            </aside>
+            {{ end }}
+          </div>
+          <div class="book-page-description">
+            {{ .Description }}
+          </div>
+        </div>
+        {{ partial "docs/inject/content-before" . }}
 
-      <footer class="book-footer">
-        {{ template "footer" . }} <!-- Footer under page content -->
-        {{ partial "docs/inject/footer" . }}
-      </footer>
+        {{ template "main" . }}
+        <!-- Page Content -->
+        {{ partial "docs/inject/content-after" . }}
 
-      {{ template "comments" . }} <!-- Comments block -->
+        <footer class="book-footer">
+          {{ template "footer" . }}
+          <!-- Footer under page content -->
+          {{ partial "docs/inject/footer" . }}
+        </footer>
 
-      <label for="menu-control" class="hidden book-menu-overlay"></label>
+        {{ template "comments" . }}
+        <!-- Comments block -->
+      </div>
+
+      {{ if default true (default .Site.Params.BookToC .Params.BookToC) }}
+      <aside class="book-toc">
+        {{ template "toc" . }}
+        <!-- Table of Contents -->
+      </aside>
+
+
     </div>
-
-    {{ if default true (default .Site.Params.BookToC .Params.BookToC) }}
-    <aside class="book-toc">
-      {{ template "toc" . }} <!-- Table of Contents -->
-    </aside>
     {{ end }}
+    {{ partial "docs/search" . }}
   </main>
-
+  {{ partial "docs/html-footer" . }}
   {{ partial "docs/inject/body" . }}
 </body>
 
 </html>
 
 {{ define "menu" }}
-  {{ partial "docs/menu" . }}
+{{ partial "docs/menu" . }}
 {{ end }}
 
 {{ define "header" }}
-  {{ partial "docs/header" . }}
+{{ partial "docs/header" . }}
 
-  {{ if default true (default .Site.Params.BookToC .Params.BookToC) }}
-  <aside class="hidden clearfix">
-    {{ template "toc" . }}
-  </aside>
-  {{ end }}
 {{ end }}
 
 {{ define "footer" }}
-  {{ partial "docs/footer" . }}
+{{ partial "docs/footer" . }}
 {{ end }}
 
 {{ define "comments" }}
-  {{ if and .Content (default true (default .Site.Params.BookComments .Params.BookComments)) }}
-  <div class="book-comments">
-    {{- partial "docs/comments" . -}}
-  </div>
-  {{ end }}
+{{ if and .Content (default true (default .Site.Params.BookComments .Params.BookComments)) }}
+<div class="book-comments">
+  {{- partial "docs/comments" . -}}
+</div>
+{{ end }}
 {{ end }}
 
 {{ define "main" }}
-  <article class="markdown">
-    {{- .Content -}}
-  </article>
+<article class="markdown">
+  {{- .Content -}}
+</article>
 {{ end }}
 
 {{ define "toc" }}
-  {{ partial "docs/toc" . }}
+{{ partial "docs/toc" . }}
 {{ end }}

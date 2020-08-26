@@ -2,10 +2,13 @@ html {
   font-size: $font-size-base;
   scroll-behavior: smooth;
   touch-action: manipulation;
+  height:100%;
+  width:100%;
 }
 
 body {
-  min-width: $body-min-width;
+  height:100%;
+  width:100%;
   color: $body-font-color;
   background: $body-background;
 
@@ -38,8 +41,8 @@ img {
   vertical-align: baseline;
 }
 
-:focus {
-  @include outline;
+:focus{
+  outline:none
 }
 
 aside nav ul {
@@ -65,6 +68,18 @@ aside nav ul {
   }
 }
 
+// Responsive styles
+aside nav,
+.book-page,
+.book-header aside,
+.book-search-inner,
+.markdown {
+  transition: 0.2s ease-in-out;
+  transition-property: transform, margin, opacity, visibility;
+  will-change: transform, margin, opacity;
+}
+
+
 ul.pagination {
   display: flex;
   justify-content: center;
@@ -75,18 +90,115 @@ ul.pagination {
   }
 }
 
-.container {
-  max-width: $container-max-width;
-  margin: 0 auto;
+//icon
+
+.book-icon-wrapper{
+  display:flex;
+  width:30px;
+  height:30px;
+  align-items: center;
+  justify-content: center;
+}
+.book-icon{
+  svg{
+    width:1rem;
+    height:1rem;
+  }
 }
 
-.book-icon {
-  filter: $icon-filter;
+.book-icon-big{
+  svg{
+    width : 1.5rem;
+    height : 1.5rem;
+  }
+}
+
+.book-icon-wrapper {
+  cursor:pointer;
+  svg{
+    filter: $icon-filter;
+    cursor:pointer;
+  }
+}
+
+//input
+.book-input-wrapper{
+  width:100%;
+  display:flex;
+  align-items: center;
+  border-radius: $border-radius;
+  height:2em;
+  input{
+    flex:1 1 auto;
+  }
+}
+.book-input-addon{
+  display:flex;
+}
+
+
+// container
+.container {
+  margin: 0 auto;
+  flex-direction: column;
+  height:100%;
+}
+
+//header
+.book-header {
+  width:100%;
+  margin-bottom: $padding-16;
+  height: 80px;
+  min-width:$body-min-width;
+  margin: 0;
+  display: flex;
+  padding: 0;
+  z-index: 1;
+  position: relative;
+  box-shadow: 0 3px 8px 0 rgba(116, 129, 141, 0.1);
+  border-bottom: 1px solid #d4dadf;
+  background-color: #FFFFFF;
+  >div{
+    height:100%;
+    width:100%;
+    max-width:$container-max-width;
+    margin:0 auto;
+  }
+}
+.book-header-left{
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
+  height:100%;
+  width:100%;
+  max-width: $menu-width;
+  padding:0 $padding-16;
+  position: relative;
+  label {
+    line-height: 0;
+  }
+  .book-icon-wrapper{
+    display:none;
+  }
+  :after{
+    @include split-line;
+    right:0;
+  }
+}
+.book-header-right{
+  flex:0 0 auto;
+  width:$toc-width;
+  padding:0 $padding-16;
+  position: relative;
+  :before{
+    @include split-line;
+    left:0;
+  }
 }
 
 .book-brand {
   margin-top: 0;
-
+  flex:0 1 auto;
   img {
     height: 1.5em;
     width: auto;
@@ -95,16 +207,30 @@ ul.pagination {
   }
 }
 
-.book-menu {
-  flex: 0 0 $menu-width;
-  font-size: $font-size-14;
+//main
+.book-main{
+  flex:1 1 auto;
+  min-width:$body-min-width;
+}
 
+//menu
+.book-menu {
+  flex: 0 0 auto;
+  width:calc((100% - #{$container-max-width}) / 2 + #{$menu-width});
+  padding-left:calc((100% - #{$container-max-width}) / 2);
+  background:#F5F7F9;
+  min-width: $menu-width;
+  font-size: $font-size-14;
+  display: flex;
   nav {
     width: $menu-width;
-    padding: $padding-16;
-    background: $body-background;
+    padding-bottom: $padding-16;
+    background:#F5F7F9;
+    border-right:1px solid #E6ECF1;
+  }
 
-    @include fixed;
+  ul{
+    padding:0 $padding-16;
   }
 
   a {
@@ -126,6 +252,27 @@ ul.pagination {
   }
 }
 
+.book-menu-header{
+  display:none;
+  height:60px;
+  align-items: center;
+  margin-bottom:$padding-16;
+  padding: 0 11px;
+  z-index: 1;
+  position: relative;
+  box-shadow: 0 3px 8px 0 rgba(116, 129, 141, 0.1);
+  border-bottom: 1px solid #d4dadf;
+  background-color: #FFFFFF;
+  color:$gray-600;
+  .book-icon-wrapper{
+    width:auto;
+  }
+}
+
+nav.fixed{
+  @include fixed
+}
+
 .book-section-flat {
   margin-bottom: $padding-16 * 2;
 
@@ -144,44 +291,109 @@ ul.pagination {
 }
 
 .book-page {
-  min-width: $body-min-width;
   flex-grow: 1;
-  padding: $padding-16;
+  max-width: $page-max-width;
+  margin:0 5.5rem;
+  padding-bottom:4rem;
+  min-width:0;
 }
+
+.book-page-header{
+  padding:2.5rem 0;
+  border-bottom: 2px solid #E6ECF1;
+  margin:0 auto 2rem;
+}
+.book-page-title-container{
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.book-page-title{
+  flex: 1 1 auto;
+  padding-right:$padding-16;
+  display:block;
+  h1{
+    margin:0;
+  }
+}
+.book-page-description{
+  color: #74818D;
+  width: 100%;
+  border: none;
+  margin: 8px 0px 0px 0px;
+  resize: none;
+  display: block;
+  outline: none;
+  padding: 0;
+  background: none;
+  min-height: 19px;
+  overflow-x: hidden;
+  border-radius: 3px;
+  letter-spacing: 0.0em;
+}
+
 
 .book-post {
   margin-bottom: $padding-16 * 3;
 }
 
-.book-header {
-  display: none;
-  margin-bottom: $padding-16;
+.book-overlay{
+  position: absolute;
+  background:rgba(24, 48, 85, 0.3);
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index:2;
+}
 
-  label {
-    line-height: 0;
+
+
+//search
+#search-control:checked ~ main {
+  .book-search-overlay {
+    display: block;
+  }
+  .book-search{
+    visibility: initial;
+  }
+  .book-search-inner {
+    transform: translateX(-$search-width);
+    box-shadow: rgba(0, 0, 0, 0.14) 0px 0px 4px, rgba(0, 0, 0, 0.28) 0px 4px 8px;;
+    border-right:1px solid rgb(230, 236, 241);
   }
 }
 
 .book-search {
   position: relative;
-  margin: $padding-16 0;
+  visibility: hidden;
   border-bottom: 1px solid transparent;
-
-  input {
-    width: 100%;
-    padding: $padding-8;
-
-    border: 0;
-    border-radius: $border-radius;
-
-    background: $gray-100;
-    color: $body-font-color;
-
-    &:required + .book-search-spinner {
-      display: block;
-    }
+  margin-inline-start: 100%;
+  font-size: $font-size-base; 
+  .book-search-inner{
+    @include fixed;
+    width:$search-width;
+    padding-bottom:1rem;
+    z-index:3;
+    background:#fff;
   }
-
+  .book-search-header{
+    height:80px;
+    align-items: center;
+    margin-bottom:$padding-16;
+    padding: 0 11px;
+    z-index: 1;
+    position: relative;
+    box-shadow: 0 3px 8px 0 rgba(116, 129, 141, 0.1);
+    border-bottom: 1px solid #d4dadf;
+    background-color: #FFFFFF;
+    color:$gray-600;
+    display:flex;
+  }
+  .book-input-wrapper{
+    flex: 1 1 auto;
+    width:initial;
+  }
   .book-search-spinner {
     position: absolute;
     top: 0;
@@ -202,16 +414,26 @@ ul.pagination {
     opacity: 0.5;
   }
 }
+.book-search-input{
+  padding: $padding-8;
 
+  border: 0;
+  color: $body-font-color;
+  &:required + .book-search-spinner {
+    display: block;
+  }
+}
+
+
+//toc
 .book-toc {
+  display:none;
   flex: 0 0 $toc-width;
   font-size: $font-size-12;
 
   nav {
     width: $toc-width;
     padding: $padding-16;
-
-    @include fixed;
   }
 
   img {
@@ -223,6 +445,7 @@ ul.pagination {
   }
 }
 
+//foot
 .book-footer {
   padding-top: $padding-16;
   font-size: $font-size-14;
@@ -233,100 +456,140 @@ ul.pagination {
   }
 }
 
+//comments
 .book-comments {
   margin-top: $padding-16;
 }
 
-.book-languages {
-  position: relative;
-  overflow: visible;
+// .book-languages {
+//   position: relative;
+//   overflow: visible;
 
-  padding: $padding-16;
-  margin: -$padding-16;
+//   padding: $padding-16;
+//   margin: -$padding-16;
 
-  ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
+//   ul {
+//     margin: 0;
+//     padding: 0;
+//     list-style: none;
 
-    li {
-      white-space: nowrap;
-      cursor: pointer;
-    }
-  }
+//     li {
+//       white-space: nowrap;
+//       cursor: pointer;
+//     }
+//   }
 
-  &:hover,
-  &:focus,
-  &:focus-within {
-    .book-languages-list {
-      display: block;
-    }
-  }
+//   &:hover,
+//   &:focus,
+//   &:focus-within {
+//     .book-languages-list {
+//       display: block;
+//     }
+//   }
 
-  .book-languages-list {
-    display: none;
+//   .book-languages-list {
+//     display: none;
 
-    position: absolute;
-    bottom: 100%;
-    left: 0;
-    padding: $padding-8 0;
+//     position: absolute;
+//     bottom: 100%;
+//     left: 0;
+//     padding: $padding-8 0;
 
-    background: $body-background;
-    box-shadow: 0 0 $padding-4 rgba(0, 0, 0, 0.1);
+//     background: $body-background;
+//     box-shadow: 0 0 $padding-4 rgba(0, 0, 0, 0.1);
 
-    li img {
-      opacity: 0.25;
-    }
+//     li img {
+//       opacity: 0.25;
+//     }
 
-    li.active img,
-    li:hover img {
-      opacity: initial;
-    }
+//     li.active img,
+//     li:hover img {
+//       opacity: initial;
+//     }
 
-    a {
-      color: inherit;
-      padding: $padding-8 $padding-16;
-    }
-  }
-}
+//     a {
+//       color: inherit;
+//       padding: $padding-8 $padding-16;
+//     }
+//   }
+// }
 
 .book-home {
   padding: $padding-16;
 }
 
-// Responsive styles
-aside nav,
-.book-page,
-.book-header aside,
-.markdown {
-  transition: 0.2s ease-in-out;
-  transition-property: transform, margin, opacity, visibility;
-  will-change: transform, margin, opacity;
+
+
+// #toc-control{
+//   display:inline
+// }
+
+// #toc-control:focus ~ main label[for="toc-control"] {
+//   @include outline;
+// }
+
+// #toc-control:checked ~ main {
+//   .book-header aside {
+//     display: block;
+//   }
+// }
+
+
+
+@media screen and (max-width: $pad-breakpoint) {
+  .book-header{
+    height:60px;
+  }
+  .book-menu-header{
+    display: flex;
+  }
+  .book-search-header{
+    height:60px;
+  }
 }
 
 @media screen and (max-width: $mobile-breakpoint) {
-  #menu-control,
-  #toc-control {
-    display: inline;
+  .book-header {
+    @include fixed;
+    z-index: 1;
   }
-
+  .book-header-center,
+  .book-header-right{
+    display:none
+  }
+  .book-header-left{
+    max-width: unset;
+    :after{
+      display:none;
+    }
+    .book-icon-wrapper{
+      display:flex;
+    }
+  }
+  .book-page{
+    margin:0 auto;
+    padding:0 1.5rem 1.5rem;
+  }
   .book-menu {
     visibility: hidden;
     margin-inline-start: -$menu-width;
-    font-size: $font-size-base;
-    z-index: 1;
+    font-size: $font-size-base; 
+    nav{
+      @include fixed;
+      z-index: 3;
+    }
+  }
+
+  .book-main{
+    padding-top:80px;
+  }
+
+  #menu-control{
+    display: inline;
   }
 
   .book-toc {
     display: none;
-  }
-
-  .book-header {
-    display: block;
-  }
-
-  #menu-control:focus ~ main label[for="menu-control"] {
-    @include outline;
   }
 
   #menu-control:checked ~ main {
@@ -336,29 +599,11 @@ aside nav,
 
     .book-menu nav {
       transform: translateX($menu-width);
-      box-shadow: 0 0 $padding-8 rgba(0, 0, 0, 0.1);
-    }
-
-    .book-page {
-      opacity: 0.25;
+      box-shadow: rgba(0, 0, 0, 0.14) 0px 0px 4px, rgba(0, 0, 0, 0.28) 0px 4px 8px;;
+      border-right:1px solid rgb(230, 236, 241);
     }
 
     .book-menu-overlay {
-      display: block;
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-    }
-  }
-
-  #toc-control:focus ~ main label[for="toc-control"] {
-    @include outline;
-  }
-
-  #toc-control:checked ~ main {
-    .book-header aside {
       display: block;
     }
   }
@@ -372,10 +617,11 @@ aside nav,
 }
 
 // Extra space for big screens
-@media screen and (min-width: $container-max-width) {
-  .book-page,
-  .book-menu nav,
-  .book-toc nav {
-    padding: $padding-16 * 2 $padding-16;
+@media screen and (min-width: $big-screen-breakpoint) {
+  aside.book-toc{
+    display:block;
+  }
+  label[for="toc-control"]{
+    display:none;
   }
 }

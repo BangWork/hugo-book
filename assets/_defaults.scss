@@ -31,15 +31,19 @@ $body-background: white !default;
 $body-font-color: $black !default;
 $body-font-weight: normal !default;
 
+
 $body-min-width: 20rem !default;
-$container-max-width: 80rem !default;
+$page-max-width: 46.5rem !default;
 
 $header-height: 3.5rem !default;
-$menu-width: 16rem !default;
-$toc-width: 16rem !default;
+$menu-width: 18rem !default;
+$toc-width: 14rem !default;
+$search-width: 20rem !default;
 
-$mobile-breakpoint: $menu-width + $body-min-width * 1.2 + $toc-width !default;
-
+$mobile-breakpoint: 1023px;
+$pad-breakpoint: 49rem !default;
+$big-screen-breakpoint: 80rem !default;
+$container-max-width:90.5rem !default;
 // Hint colors
 $hint-colors: (
   info: #6bf,

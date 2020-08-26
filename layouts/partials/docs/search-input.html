@@ -1,0 +1,8 @@
+<div class="book-input-wrapper">
+    <span class="book-input-addon">
+        {{ partial "svgs/search.svg" .}}
+    </span>
+    <input type="text" class="book-search-input" placeholder="{{ i18n "Search" }}" aria-label="{{ i18n "Search" }}"
+        maxlength="64" data-hotkeys="s/" />
+    <div class="book-search-spinner hidden"></div>
+</div>

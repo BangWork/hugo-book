@@ -90,3 +90,13 @@ input.toggle {
   outline-color: currentColor;
   outline-color: -webkit-focus-ring-color;
 }
+
+
+@mixin split-line {
+  top: 50%;
+  height: 40px;
+  content: " ";
+  position: absolute;
+  transform: translateY(-50%);
+  border-left: 1px solid #E6ECF1;
+}

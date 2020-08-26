@@ -1,0 +1,20 @@
+{{ $popoverJS := resources.Get "popper.js" | resources.ExecuteAsTemplate "popper.js" . |  resources.Fingerprint }}
+<script defer src="{{ $popoverJS.RelPermalink }}" integrity="{{ $popoverJS.Data.Integrity }}"></script>
+
+{{ $tippyJS := resources.Get "tippy.js" | resources.ExecuteAsTemplate "tippy.js" . |  resources.Fingerprint }}
+<script defer src="{{ $tippyJS.RelPermalink }}" integrity="{{ $tippyJS.Data.Integrity }}"></script>
+
+
+{{- if default true .Site.Params.BookSearch }}
+{{- $searchJSFile := printf "%s.search.js" .Language.Lang }}
+{{- $searchJS := resources.Get "search.js" | resources.ExecuteAsTemplate $searchJSFile . | resources.Minify | resources.Fingerprint }}
+<script defer src="{{ $searchJS.RelPermalink }}" integrity="{{ $searchJS.Data.Integrity }}"></script>
+{{ end -}}
+
+{{- if .Site.Params.BookServiceWorker }}
+{{- $swJS := resources.Get "sw-register.js" | resources.ExecuteAsTemplate "sw.js" . | resources.Minify | resources.Fingerprint }}
+<script defer src="{{ $swJS.RelPermalink }}" integrity="{{ $swJS.Data.Integrity }}"></script>
+{{ end -}}
+
+{{- $indexJS := resources.Get "index.js" | resources.ExecuteAsTemplate "index.js" . | resources.Minify | resources.Fingerprint }}
+<script defer src="{{ $indexJS.RelPermalink }}" integrity="{{ $indexJS.Data.Integrity }}"></script>

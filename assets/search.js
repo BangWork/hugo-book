@@ -4,7 +4,7 @@
 {{ $searchData := resources.Get "search-data.js" | resources.ExecuteAsTemplate $searchDataFile . | resources.Minify | resources.Fingerprint }}
 
 (function () {
-  const input = document.querySelector('#book-search-input');
+  const input = document.querySelector('.book-search input');
   const results = document.querySelector('#book-search-results');
 
   if (!input) {
@@ -66,7 +66,7 @@
     searchHits.forEach(function (page) {
       const li = element('<li><a href></a><small></small></li>');
       const a = li.querySelector('a'), small = li.querySelector('small');
-
+      console.log(page)
       a.href = page.href;
       a.textContent = page.title;
       small.textContent = page.section;

@@ -372,7 +372,7 @@ ul.pagination {
 }
 
 .book-overlay{
-  position: absolute;
+  position: fixed;
   background:rgba(24, 48, 85, 0.3);
   top: 0;
   bottom: 0;
@@ -439,7 +439,6 @@ ul.pagination {
 .book-search-header{
   height:80px;
   align-items: center;
-  margin-bottom:$padding-16;
   padding: 0 11px;
   z-index: 1;
   position: relative;
@@ -456,6 +455,30 @@ ul.pagination {
   color: $body-font-color;
   &:required + .book-search-spinner {
     display: block;
+  }
+}
+#book-search-results{
+  li{
+    margin:0;
+    border-bottom: 1px solid rgb(230, 236, 241);
+  }
+  a{
+    height:100%;
+    padding: 2rem 1.5rem 1rem;
+    color:$black;
+    display: flex;
+    align-items: center;
+    .left-line{
+      height: 24px;
+      display: block;
+      margin: 0px 8px 0px 0px;
+      padding: 0px;
+      border-left: 2px solid rgb(56, 132, 255);
+    }
+    &:hover{
+      opacity: 1;
+      background:rgb(245, 247, 249);
+    }
   }
 }
 
@@ -642,20 +665,6 @@ ul.pagination {
 //   }
 // }
 
-
-
-@media screen and (max-width: $pad-breakpoint) {
-  .book-header{
-    height:60px;
-  }
-  .book-menu-header{
-    display: flex;
-  }
-  .book-search-header{
-    height:60px;
-  }
-}
-
 @media screen and (max-width: $mobile-breakpoint) {
   .book-header {
     @include fixed;
@@ -719,6 +728,29 @@ ul.pagination {
     }
   }
 }
+
+@media screen and (max-width: $pad-breakpoint) {
+  .book-header{
+    height:60px;
+  }
+  .book-menu{
+    nav{
+      padding-top:0;
+    }
+  }
+  .book-menu-header{
+    display: flex;
+    margin-bottom:2rem;
+  }
+  .book-search-header{
+    height:60px;
+  }
+  .book-main{
+    padding-top:60px;
+  }
+}
+
+
 
 // Extra space for big screens
 @media screen and (min-width: $big-screen-breakpoint) {

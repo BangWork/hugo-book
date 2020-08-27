@@ -64,13 +64,13 @@
 
     const searchHits = window.bookSearchIndex.search(input.value, 10);
     searchHits.forEach(function (page) {
-      const li = element('<li><a href></a><small></small></li>');
-      const a = li.querySelector('a'), small = li.querySelector('small');
-      console.log(page)
+      const li = element('<li><a href><div class="left-line"></div><div class="result"></div></a></li>');
+      const a = li.querySelector('a');
+      const text = a.querySelector(".result");
+      // small = li.querySelector('small');
       a.href = page.href;
-      a.textContent = page.title;
-      small.textContent = page.section;
-
+      text.textContent = page.title;
+      //small.textContent = page.section;
       results.appendChild(li);
     });
   }

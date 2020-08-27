@@ -1,6 +1,12 @@
 - id: Search
   translation: 搜索文档...
 
+- id: Toc
+  translation: 内容
+
+- id: Topdf
+  translation: 导出为 PDF
+
 - id: Edit this page
   translation: 编辑本页
 

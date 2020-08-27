@@ -1,8 +1,15 @@
 - id: Search
   translation: Search
 
+- id: Toc
+  translation: Table of Contents
+
+- id: Topdf
+  translation: Export PDF
+
 - id: Edit this page
   translation: Edit this page
+
 
 - id: Last modified by
   translation: Last modified by

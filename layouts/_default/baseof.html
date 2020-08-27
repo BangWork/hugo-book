@@ -29,6 +29,11 @@
             <div class="book-page-title">
               <h1>{{ partial "docs/title" . }}</h1>
             </div>
+              {{ if default true (default true .Params.BookToPDF) }}
+            <span class="book-icon-wrapper">
+              {{partial "svgs/pdf.svg" .}}
+            </span>
+            {{ end }}
             <label for="toc-control">
               {{ if default true (default .Site.Params.BookToC .Params.BookToC) }}
               <span class="book-icon-wrapper">
@@ -37,9 +42,13 @@
               {{ end }}
             </label>
             {{ if default true (default .Site.Params.BookToC .Params.BookToC) }}
-            <aside id="tocPopover" class="hidden clearfix">
-              {{ template "toc" . }}
-            </aside>
+            <div id="tocPopover" class="hidden clearfix">
+              <div class="book-popover-toc">
+                <div class="book-popover-toc-inner">
+                  {{ template "toc" . }}
+                </div>
+              </div>
+            </div>
             {{ end }}
           </div>
           <div class="book-page-description">
@@ -63,9 +72,23 @@
       </div>
 
       {{ if default true (default .Site.Params.BookToC .Params.BookToC) }}
-      <aside class="book-toc">
-        {{ template "toc" . }}
-        <!-- Table of Contents -->
+      <aside class="book-page-aside">
+        <div class="book-page-aside-inner">
+          <div class="book-topdf">
+            <div class="book-topdf-header">
+              <span class="book-icon-wrapper">
+                {{partial "svgs/pdf.svg" .}}
+              </span>
+              <span class="book-toc-text">
+                {{ i18n "Topdf"}}
+              </span>
+            </div>
+          </div>
+          <div class="book-toc">
+            {{ template "toc" . }}
+          </div>
+          <!-- Table of Contents -->
+        </div>
       </aside>
 
 
@@ -107,5 +130,13 @@
 {{ end }}
 
 {{ define "toc" }}
+<div class="book-toc-header">
+  <span class="book-icon-wrapper">
+    {{partial "svgs/toc.svg" .}}
+  </span>
+  <span class="book-toc-text">
+    {{ i18n "Toc"}}
+  </span>
+</div>
 {{ partial "docs/toc" . }}
 {{ end }}

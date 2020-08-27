@@ -221,7 +221,7 @@ ul.pagination {
   width:$toc-width;
   padding:0 $padding-16;
   position: relative;
-  :before{
+  &:before{
     @include split-line;
     left:0;
   }
@@ -255,7 +255,7 @@ ul.pagination {
   display: flex;
   nav {
     width: $menu-width;
-    padding-bottom: $padding-16;
+    padding: 2rem 0 $padding-16;
     background:#F5F7F9;
     border-right:1px solid #E6ECF1;
   }
@@ -300,7 +300,7 @@ ul.pagination {
   }
 }
 
-nav.fixed{
+.fixed{
   @include fixed
 }
 
@@ -338,6 +338,9 @@ nav.fixed{
   display:flex;
   align-items: center;
   justify-content: space-between;
+  .book-icon-wrapper{
+    color:rgb(157, 170, 182);
+  }
 }
 .book-page-title{
   flex: 1 1 auto;
@@ -458,11 +461,43 @@ nav.fixed{
 
 
 //toc
-.book-toc {
+.book-popover-toc{
+  max-width: 260px;
+  min-width: 224px;
+  max-height: 233px;
+  margin: -5px -9px;
+  padding: 0px;
+  overflow: hidden;
+  .book-toc-header{
+    padding-left:1.5rem;
+    margin-bottom:0.5rem;
+  }
+  .book-popover-toc-inner{
+    display: block;
+    overflow-x: hidden;
+    overflow-y: overlay;
+    flex: 1 1 0%;
+    margin: 0px;
+    padding: 0.75rem 0;
+  }
+  nav{
+    padding-left:1.5rem;
+    padding-right:1rem;
+  }
+  a{
+    padding-left:1rem;
+    padding-top:0.25rem;
+    padding-bottom:0.25rem;
+  }
+}
+.book-page-aside {
   display:none;
-  flex: 0 0 $toc-width;
+  flex: 0 0 auto;
+  width: $toc-width;
   font-size: $font-size-12;
+  >div{
 
+  }
   nav {
     width: $toc-width;
     padding: $padding-16;
@@ -474,6 +509,47 @@ nav.fixed{
 
   nav > ul > li:first-child {
     margin-top: 0;
+  }
+}
+.book-page-aside-inner{
+  width: $toc-width;
+  height: 100%;
+  padding-top:2rem;
+}
+.book-topdf,.book-toc{
+  margin-bottom:1.5rem;
+  position:relative;
+  padding:0 16px;
+  &:before{
+    @include split-line;
+    height:100%;
+    left:0;
+  }
+}
+.book-topdf{
+  padding:4px 16px;
+}
+.book-topdf-header,.book-toc-header{
+  display:flex;
+  align-items: center;
+  color:rgb(157, 170, 182);
+  .book-icon-wrapper{
+    height:initial;
+    width:initial;
+    margin-right:0.5rem;
+    svg{
+      width: 1rem;
+      height:1rem;
+    }
+  }
+}
+.book-toc,.book-popover-toc{
+  a{
+    color:rgb(116, 129, 141);
+    &:hover{
+      color:rgb(56, 132, 255);
+      opacity: 1;
+    }
   }
 }
 
@@ -591,7 +667,7 @@ nav.fixed{
   }
   .book-header-left{
     max-width: unset;
-    :after{
+    &:after{
       display:none;
     }
     .book-icon-wrapper{
@@ -620,10 +696,6 @@ nav.fixed{
     display: inline;
   }
 
-  .book-toc {
-    display: none;
-  }
-
   #menu-control:checked ~ main {
     .book-menu {
       visibility: initial;
@@ -650,7 +722,7 @@ nav.fixed{
 
 // Extra space for big screens
 @media screen and (min-width: $big-screen-breakpoint) {
-  aside.book-toc{
+  aside.book-page-aside{
     display:block;
   }
   label[for="toc-control"]{

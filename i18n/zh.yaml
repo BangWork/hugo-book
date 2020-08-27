@@ -9,6 +9,12 @@
 
 - id: Edit this page
   translation: 编辑本页
+  
+- id: prev
+  translation: "上一个"
+
+- id: next
+  translation: "下一个"
 
 - id: Last modified by
   translation: 最后修改者

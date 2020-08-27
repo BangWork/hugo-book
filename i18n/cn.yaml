@@ -7,7 +7,13 @@
 
 - id: Topdf
   translation: 导出为 PDF
-  
+
+- id: prev
+  translation: "上一个"
+
+- id: next
+  translation: "下一个"
+
 - id: Edit this page
   translation: 编辑本页
 

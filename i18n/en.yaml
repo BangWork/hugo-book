@@ -10,6 +10,11 @@
 - id: Edit this page
   translation: Edit this page
 
+- id: prev
+  translation: "Previous Page"
+
+- id: next
+  translation: "Next Page"
 
 - id: Last modified by
   translation: Last modified by

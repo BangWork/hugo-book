@@ -13,7 +13,9 @@
     </span>
   </div>
   <div class="book-header-center">
-    {{ partial "docs/menu-hugo" .Site.Menus.header }}
+    <nav class="book-header-nav">
+      {{ partial "docs/menu-header" .}}
+    </nav>
   </div>
   <div class="book-header-right">
     {{ partial "docs/search-input" .}}

@@ -45,15 +45,10 @@ img {
   outline:none
 }
 
-aside nav ul {
+nav ul {
   padding: 0;
   margin: 0;
   list-style: none;
-
-  li {
-    margin: 1em 0;
-    position: relative;
-  }
 
   a {
     display: block;
@@ -66,6 +61,11 @@ aside nav ul {
   ul {
     padding-inline-start: $padding-16;
   }
+}
+
+aside nav ul li{
+  margin: 1em 0;
+  position: relative;
 }
 
 // Responsive styles
@@ -185,6 +185,37 @@ ul.pagination {
     right:0;
   }
 }
+.book-header-center{
+  flex: 1 1 auto;
+  margin:0 5.5rem;
+  height:100%
+}
+.book-header-nav{
+  height:100%;
+  ul{
+    display:flex;
+    height:100%;
+    :first-child{
+      margin-left:0;
+    }
+    :last-child{
+      margin-right:0;
+    }
+  }
+  li{
+      height: 100%;
+      margin: 0px $padding-16;
+      display: flex;
+      padding: 0;
+      border-top: 3px solid transparent;
+      align-items: center;
+      white-space: nowrap;
+      border-bottom: 3px solid transparent;
+      -webkit-box-align: center;
+      
+  }
+}
+
 .book-header-right{
   flex:0 0 auto;
   width:$toc-width;

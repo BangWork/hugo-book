@@ -46,7 +46,26 @@ enableGitInfo = true
 [[menu.after]]
   name = "Hugo Themes"
   url = "https://themes.gohugo.io/hugo-book/"
-  weight = 20
+  weight = 20 
+
+[[menu.header]]
+  name = "ONES vs Jira"
+  url = "https://ones.ai/ones-vs-jira.html"
+  weight = 1
+  
+[[menu.header]]
+  name = "新手教程"
+  url = "https://guides-ones.gitbook.io/new/"
+  weight = 2
+
+[[menu.header]]
+  name = "免费注册"
+  url = "https://ones.ai/sign_up.html?s=0"
+  weight = 3
+
+[[menu.header]]
+  url = "/docs/shortcodes/columns"
+  weight = 4
 
 [params]
   # (Optional, default true) Controls table of contents visibility on right side of pages.

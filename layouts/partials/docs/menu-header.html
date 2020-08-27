@@ -1,0 +1,23 @@
+<!--
+  This is template for hugo menus, accepts MenuEntity as context
+  https://gohugo.io/variables/menus/
+-->
+{{ $currentPage := .}}
+{{ if .Site.Menus.header }}
+  <ul>
+    {{ range .Site.Menus.header }}
+    <li>
+      {{ $page := $.GetPage .URL }}
+      <a href="{{ .URL }}" class='{{ if eq $currentPage $page }}active{{ end }}' {{ if not $page }}target="_blank" rel="noopener"{{ end }}>
+        {{- .Pre -}}
+        {{ if .Name }}
+          {{ .Name }}
+        {{ else }}
+          {{ partial "docs/title" $page }}
+        {{ end }}
+        {{- .Post -}}
+      </a>
+    </li>
+    {{ end }}
+  </ul>
+{{ end }}

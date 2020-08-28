@@ -1,6 +1,11 @@
-{{ $bookSection := default "docs" .Site.Params.BookSection  }}
-{{ if eq $bookSection "*" }}
-  {{ $bookSection = "/" }}{{/* Backward compatibility */}}
+{{ $bookSection := "novice-manual" }}
+
+{{ if in .Permalink "novice-manual" }}
+    {{ $bookSection = "novice-manual" }}
+{{ end }}
+
+{{ if in .Permalink "product-manual" }}
+    {{ $bookSection = "product-manual" }}
 {{ end }}
 
 {{ with .Site.GetPage $bookSection }}

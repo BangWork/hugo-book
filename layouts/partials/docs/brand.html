@@ -1,8 +1,38 @@
 <div class="book-brand">
-  <a href="{{ .Site.BaseURL | relLangURL }}">
-    {{- with .Site.Params.BookLogo -}}
-    <img src="{{ . | relURL }}" alt="Logo" />
+    {{- if .Site.Params.BookDesktopLogo -}}
+    <div class="book-logo-desktop">
+      <a href="{{ .Site.BaseURL | relLangURL }}">
+        <img src="{{ .Site.Params.BookDeskTopLogo | relURL }}" alt="Logo" />
+      </a>
+    </div>
+      {{- if .Site.Params.BookMobileLogo -}}
+      <div class="book-logo-mobile">
+        <a href="{{ .Site.BaseURL | relLangURL }}">
+          <img src="{{ .Site.Params.BookMobileLogo | relURL }}" alt="Logo" />
+        </a>
+      </div>
+      {{- else -}}
+      <div class="book-logo-mobile">
+        <a href="{{ .Site.BaseURL | relLangURL }}">
+          <img src="{{ .Site.Params.BookDesktopLogo | relURL }}" alt="Logo" />
+        </a>
+      </div>
+      {{- end -}}
+    {{- else if .Site.Params.BookLogo -}}
+    <div class="book-logo-desktop">
+      <a href="{{ .Site.BaseURL | relLangURL }}">
+        <img src="{{ .Site.Params.BookLogo | relURL }}" alt="Logo" />
+      </a>
+    </div>
+    <div class="book-logo-mobile">
+      <a href="{{ .Site.BaseURL | relLangURL }}">
+        <img src="{{ .Site.Params.BookLogo | relURL }}" alt="Logo" />
+      </a>
+    </div>
+    {{- else -}}
+    <a href="{{ .Site.BaseURL | relLangURL }}">
+      {{ .Site.Title }}
+    </a>
     {{- end -}}
-    <span>{{ .Site.Title }}</span>
   </a>
 </div>

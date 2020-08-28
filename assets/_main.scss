@@ -252,15 +252,39 @@ ul.pagination {
   .book-icon-wrapper{
     display:none;
   }
-  :after{
+  &:after{
     @include split-line;
     right:0;
+  }
+}
+.book-brand {
+  margin-top: 0;
+  flex:0 1 auto;
+  width:15.625rem;
+  a{
+    display:block;
+  }
+}
+.book-logo-mobile{
+  display:none;
+  img{
+    max-width:200px;
+    height:1.875rem;
+  }
+}
+.book-logo-desktop{
+  display: block;
+  img{
+    max-width:200px;
+    height:2.5rem;
   }
 }
 .book-header-center{
   flex: 1 1 auto;
   margin:0 5.5rem;
-  height:100%
+  height:100%;
+  max-width:46.5rem;
+  min-width:0;
 }
 .book-header-nav{
   height:100%;
@@ -299,16 +323,6 @@ ul.pagination {
   }
 }
 
-.book-brand {
-  margin-top: 0;
-  flex:0 1 auto;
-  img {
-    height: 1.5em;
-    width: auto;
-    vertical-align: middle;
-    margin-inline-end: $padding-8;
-  }
-}
 
 //main
 .book-main{
@@ -768,6 +782,10 @@ ul.pagination {
     @include fixed;
     z-index: 1;
   }
+  .book-brand{
+    width:initial;
+    padding:0 1.5rem;
+  }
   .book-header-center,
   .book-header-right{
     display:none
@@ -830,6 +848,12 @@ ul.pagination {
 @media screen and (max-width: $pad-breakpoint) {
   .book-header{
     height:60px;
+  }
+  .book-logo-mobile{
+    display:block;
+  }
+  .book-logo-desktop{
+    display:none;
   }
   .book-menu{
     nav{

@@ -147,7 +147,11 @@
 
 {{ define "main" }}
 <article class="markdown">
-  {{- .Content -}}
+  {{ if .Content }}
+    {{- .Content -}}
+  {{ else }}
+    1111
+  {{ end }}
 </article>
 {{ end }}
 

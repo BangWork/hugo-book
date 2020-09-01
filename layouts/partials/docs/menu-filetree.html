@@ -21,8 +21,8 @@
           {{ template "book-page-link" (dict "Page" . "CurrentPage" $.CurrentPage) }}
           {{ template "book-section-children" (dict "Section" . "CurrentPage" $.CurrentPage "IsFirstLevel" false) }}
         </li>
-      {{ else if and .IsPage .Content }}
-        <li data-isPage="true">
+      {{ else if and .IsPage }}
+        <li>
           {{ template "book-page-link" (dict "Page" . "CurrentPage" $.CurrentPage) }}
         </li>
       {{ end }}
@@ -32,7 +32,7 @@
 {{ end }}
 
 {{ define "book-page-link" }}{{/* (dict "Page" .Page "CurrentPage" .CurrentPage) */}}
-  {{ if .Page.Content }}
+  {{ if .Page }}
     <a href="{{ .Page.RelPermalink }}" class="
         {{- if and .Page.Params.bookCollapseSection .Page.IsSection }}collapsed {{ end }}
         {{- if eq .CurrentPage .Page }}active{{ end }}">

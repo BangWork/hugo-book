@@ -5,6 +5,9 @@
 - id: Toc
   translation: 内容
 
+- id: BlankHint
+  translation: 以下是本节中的文章
+
 - id: Topdf
   translation: 导出为 PDF
 

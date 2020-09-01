@@ -706,7 +706,45 @@ ul.pagination {
 }
 
 
-
+.book-blank{
+  margin: 0px;
+  padding: 2.5rem 0px;
+  a.book-card{
+    margin: 0;
+    padding: 1rem;
+    color: $black;
+    flex-direction: column;
+    &:visited{
+      color:unset
+    }
+    &:hover{
+      text-decoration: none;
+      color:rgb(56, 132, 255);
+    }
+  }
+  .book-card-title{
+    width:100%;
+  }
+  .book-card-hint{
+    margin: 8px 0px 0px;
+    word-break: break-all;
+  }
+}
+.book-blank-hint{
+  margin: 0px 0px 0.5rem;
+  padding: 0px;
+}
+.book-blank-section{
+  width: 100%;
+  margin: 24px 0px;
+  display: grid;
+  padding: 0px;
+  gap: 24px;
+  justify-content: center;
+  -webkit-box-pack: center;
+  grid-template-rows: auto;
+  grid-template-columns: calc(50% - 8px) calc(50% - 8px);
+}
 //comments
 .book-comments {
   margin-top: $padding-16;

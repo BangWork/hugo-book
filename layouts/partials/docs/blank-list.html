@@ -1,0 +1,23 @@
+{{ if .IsSection }}
+    <div class="book-blank">
+        <div class="book-blank-hint">
+            {{i18n "BlankHint"}}
+        </div>
+        <div class="book-blank-section">
+        {{ range .Pages }}
+            {{ if not .Params.bookHidden }}
+                <a class="book-card" href="{{.RelPermalink}}">
+                    <div class="book-card-title">
+                        {{ .Title }}
+                    </div>
+                    {{ if .Description }}
+                    <div class="book-card-hint">
+                        {{ .Description }}
+                    </div>
+                    {{ end }}
+                </a>
+            {{ end }}   
+        {{ end }}
+        </div>
+    </div>
+{{ end }}

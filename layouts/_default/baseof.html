@@ -126,19 +126,10 @@
 
 {{ define "main" }}
 <article class="markdown">
-  {{ $content_len := len .Content }}
-  {{ if ne $content_len 0 }}
-    {{- .Content -}}
+  {{ if .Content }}
+    {{ .Content }}
   {{ else }}
-  <ul>
-    {{ range (where .Pages "Params.bookhidden" "ne" true) }}
-      <li>
-        {{ $title := "12" }}
-        {{ with .Site.GetPage  .RelPermalink }}{{ $title = .Title }}{{ end }}
-        {{ partial "docs/myref.html" (dict "content" . "RelPermalink" .RelPermalink "Title" $title) }}
-      </li>
-    {{ end }}
-  </ul>
+    {{ partial "docs/blank-list.html" .}}
   {{ end }}
 </article>
 {{ end }}
@@ -153,16 +144,4 @@
   </span>
 </div>
 {{ partial "docs/toc" . }}
-{{ end }}
-
-{{ define "book-page-link" }}{{/* (dict "Page" .Page "CurrentPage" .CurrentPage) */}}
-  {{ if .Page }}
-    <a href="{{ .Page.RelPermalink }}" class="
-        {{- if and .Page.Params.bookCollapseSection .Page.IsSection }}collapsed {{ end }}
-        {{- if eq .CurrentPage .Page }}active{{ end }}">
-      {{- partial "docs/title" .Page -}}
-    </a>
-  {{ else }}
-    <span>{{- partial "docs/title" .Page -}}</span>
-  {{ end }}
 {{ end }}

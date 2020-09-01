@@ -7,6 +7,9 @@
 - id: Topdf
   translation: Export PDF
 
+- id: BlankHint
+  translation: Here are the articles in this section
+
 - id: Edit this page
   translation: Edit this page
 

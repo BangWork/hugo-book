@@ -345,9 +345,11 @@ ul.pagination {
     background:#F5F7F9;
     border-right:1px solid #E6ECF1;
   }
-
+  nav>ul{
+    padding-right:2 * $padding-16;
+  }
   ul{
-    padding:0 $padding-16;
+    padding:0 0 0 $padding-16;
   }
 
   a {

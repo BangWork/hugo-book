@@ -1,0 +1,13 @@
+<a class="book-page-ref" href="{{.Get `href`}}">
+    <div class="book-page-ref-icon">
+        {{partial "svgs/search-close.svg"}}
+    </div>
+    {{ with .Site.GetPage  (.Get "href")}}
+    <div class="book-page-ref-title">
+        {{ .Title }}
+    </div>
+    <div class="book-page-ref-url">
+        {{ .RelPermalink}}
+    </div>
+    {{ end }}
+</a>

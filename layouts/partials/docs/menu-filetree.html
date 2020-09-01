@@ -1,32 +1,28 @@
-{{ $bookSection := "novice-manual" }}
-
-{{ if in .Permalink "novice-manual" }}
-    {{ $bookSection = "novice-manual" }}
-{{ end }}
-
-{{ if in .Permalink "product-manual" }}
-    {{ $bookSection = "product-manual" }}
-{{ end }}
-
-{{ with .Site.GetPage $bookSection }}
-  {{ template "book-section-children" (dict "Section" . "CurrentPage" $) }}
+{{ with .Site.GetPage .Section }}
+  {{ template "book-section-children" (dict "Section" . "CurrentPage" $ "IsFirstLevel" true) }}
 {{ end }}
 
 {{ define "book-section-children" }}{{/* (dict "Section" .Section "CurrentPage" .CurrentPage) */}}
   {{ $self := eq .CurrentPage .Section }}
   {{ $ancestor := .Section.IsAncestor .CurrentPage }}
   {{ $collapsed := .Section.Params.bookCollapseSection }}
+  {{ $pages := where .Section.Pages "Params.bookhidden" "ne" true}}
 
-  {{ if or $self $ancestor (not $collapsed) }}
+  {{ if and (or $self $ancestor (not $collapsed)) $pages}}
   <ul>
-    {{ range (where .Section.Pages "Params.bookhidden" "ne" true) }}
+    {{ if and .IsFirstLevel .Section.Content }}
+      <li class="book-section-flat">
+        {{ template "book-page-link" (dict "Page" .Section "CurrentPage" $.CurrentPage) }}
+      </li>
+    {{ end }}
+    {{ range $pages }}
       {{ if .IsSection }}
         <li {{- if .Params.BookFlatSection }} class="book-section-flat" {{ end -}}>
           {{ template "book-page-link" (dict "Page" . "CurrentPage" $.CurrentPage) }}
-          {{ template "book-section-children" (dict "Section" . "CurrentPage" $.CurrentPage) }}
+          {{ template "book-section-children" (dict "Section" . "CurrentPage" $.CurrentPage "IsFirstLevel" false) }}
         </li>
       {{ else if and .IsPage .Content }}
-        <li>
+        <li data-isPage="true">
           {{ template "book-page-link" (dict "Page" . "CurrentPage" $.CurrentPage) }}
         </li>
       {{ end }}

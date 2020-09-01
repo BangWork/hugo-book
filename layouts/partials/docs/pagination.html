@@ -1,0 +1,100 @@
+<div class="book-page-navgation">
+    {{ $next := partial "get-next" .}}
+    {{ $prev := partial "get-prev" .}}
+    <div class="book-page-navgation-inner {{ if or (not $prev) (not $next) }}book-page-unique{{ end }}">
+      {{ with $next}}
+      <a class="book-page-next book-card" href="{{.RelPermalink}}">
+        <div class="book-card-body">
+          <div class="book-card-hint">{{ i18n "next" }}</div>
+          <div class="book-card-title">{{ partial "docs/title" . }}</div>
+        </div>
+        <div class="book-card-icon">{{ partial "svgs/search-close.svg" . }}</div>
+      </a>
+      {{ end }}
+      {{ with $prev}}
+      <a class="book-page-prev book-card" href="{{.RelPermalink}}">
+        <div class="book-card-icon">{{ partial "svgs/menu-close.svg" . }}</div>
+        <div class="book-card-body">
+          <div class="book-card-hint">{{ i18n "prev" }}</div>
+          <div class="book-card-title">{{ partial "docs/title" . }}</div>
+        </div>
+      </a>
+      {{ end }}
+    </div>
+</div>
+
+{{ define "partials/is-valid-node" }}
+    {{ $isValidNode := true }}
+    {{ if and .IsSection (not .Content) }}
+        {{ $isValidNode = false}}
+    {{ else if eq .Params.bookhidden true}}
+        {{ $isValidNode = false}}
+    {{ end }}
+    {{ return $isValidNode }}
+{{ end }}
+
+{{ define "partials/get-prev" }}
+    {{ $prev := false }}
+    {{ if eq . (.Site.GetPage .Section) }}
+        {{ $prev = false}}
+    {{ else }}
+        {{ $prev = .Parent.Pages.Next .}}
+        {{ if not $prev }}
+            {{ $prev = .Parent}}
+        {{ else if $prev.IsSection }}
+            {{ $lastPage := partial "get-last-leaf-page" $prev}}
+            {{ if $lastPage }}
+                {{ $prev = $lastPage }}
+            {{ end }}
+        {{ end }}
+        {{ if not (partial "is-valid-node" $prev) }}       
+            {{ $prev = partial "get-prev" $prev }}
+        {{ end }}
+    {{ end }}
+    {{ return $prev }}
+{{ end }}
+
+{{ define "partials/get-last-leaf-page" }} 
+    {{ $lastPage := false}}
+    {{ if .Pages }}
+        {{ $lastPage = index (last 1 .Pages) 0 }}
+        {{ if $lastPage.IsSection }}
+            {{ $lastChild := partial "get-last-leaf-page" $lastPage}}
+            {{ if $lastChild }}
+                {{ $lastPage = $lastChild }}
+            {{ end }}
+        {{ end }}
+    {{ end }}
+    {{ return $lastPage }}
+{{ end }}
+
+
+{{ define "partials/get-next" }}
+    {{ $next := false }}
+    {{ if eq . (partial "get-last-leaf-page" (.Site.GetPage .Section)) }}
+        {{ $next = false}}
+    {{ else }}
+        {{ if and .IsSection .Pages }}
+            {{ $next = index (first 1 .Pages) 0 }}
+        {{ else }}
+            {{ $next = partial "get-next-sibling" .}}
+        {{ end }}
+        {{ if and $next (not (partial "is-valid-node" $next))}}
+            {{ $next = partial "get-next" $next }}
+        {{ end }}
+    {{ end }}
+    {{ return $next }}
+{{ end }}
+
+{{ define  "partials/get-next-sibling" }}
+    {{ $nextSibling := false }}
+    {{ if eq . (.Site.GetPage .Section)  }}
+        {{ $nextSibling = false }}
+    {{ else }}
+        {{ $nextSibling = .Parent.Pages.Prev .}}
+        {{ if not $nextSibling }}
+            {{ $nextSibling = partial "get-next-sibling" .Parent }}
+        {{ end }}
+    {{ end }}
+    {{ return $nextSibling }}
+{{ end }}

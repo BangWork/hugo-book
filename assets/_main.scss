@@ -485,7 +485,7 @@ ul.pagination {
 }
 
 .book-search {
-  position: relative;
+  position: absolute;
   visibility: hidden;
   border-bottom: 1px solid transparent;
   margin-inline-start: 100%;
@@ -689,6 +689,14 @@ ul.pagination {
   grid-template-areas: "previous next";
   grid-template-columns: 1fr 1fr
 }
+.book-page-navgation-inner.book-page-unique{
+  grid-row-gap: 24px;
+  grid-template-areas:
+      "next"
+      "previous";
+  grid-template-columns: 1fr;
+}
+
 .book-page-prev{
   text-align: right;
   grid-area: previous;

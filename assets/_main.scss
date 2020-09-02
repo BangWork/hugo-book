@@ -344,6 +344,7 @@ ul.pagination {
     padding: 2rem 0 $padding-16;
     background:#F5F7F9;
     border-right:1px solid #E6ECF1;
+    overflow:auto;
   }
   nav>ul{
     padding-right:2 * $padding-16;
@@ -606,9 +607,6 @@ ul.pagination {
   flex: 0 0 auto;
   width: $toc-width;
   font-size: $font-size-12;
-  >div{
-
-  }
   nav {
     width: $toc-width;
     padding: $padding-16;
@@ -626,6 +624,7 @@ ul.pagination {
   width: $toc-width;
   height: 100%;
   padding-top:2rem;
+  overflow: auto;
 }
 .book-topdf,.book-toc{
   margin-bottom:1.5rem;
@@ -729,6 +728,7 @@ ul.pagination {
   }
   .book-card-hint{
     margin: 8px 0px 0px;
+    width:100%;
     word-break: break-all;
   }
 }

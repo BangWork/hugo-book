@@ -7,8 +7,11 @@
   <ul>
     {{ range .Site.Menus.header }}
     <li>
-      {{ $page := $.GetPage .URL }}
-      <a href="{{ .URL }}" class='{{ if eq $currentPage $page }}active{{ end }}' {{ if not $page }}target="_blank" rel="noopener"{{ end }}>
+      {{ $page := .Page }}
+      {{ if not $page }}
+        {{ $page = $.Site.GetPage .URL }}
+      {{ end }}
+      <a href="{{ .URL }}" class='{{ if eq $currentPage $page }}active{{ end }}' {{ if or (not $page) (ne $page.Section $currentPage.Section) }}target="_blank" rel="noopener"{{ end }}>
         {{- .Pre -}}
         {{ if .Name }}
           {{ .Name }}

@@ -5,16 +5,20 @@
 {{ define "book-section-children" }}{{/* (dict "Section" .Section "CurrentPage" .CurrentPage) */}}
   {{ $pages := where .Section.Pages "Params.bookhidden" "ne" true}}
   {{ if and .ShowChild $pages}}
-  <ul>
+  <ul {{ if not .IsFirstLevel }}class="book-menu-children"{{ end }}>
     {{ if and .IsFirstLevel .Section.Content }}
       <li class="book-section-flat">
-        {{ template "book-page-link" (dict "Page" .Section "CurrentPage" $.CurrentPage) }}
+        {{ template "book-menu-link" (dict "Page" .Section "CurrentPage" $.CurrentPage) }}
       </li>
     {{ end }}
     {{ range $pages }}
       {{ if .IsSection }}
         <li {{ if and $.IsFirstLevel .Params.BookFlatSection }} class="book-section-flat" {{ end }}>
-          {{ template "book-page-link" (dict "Page" . "CurrentPage" $.CurrentPage) }}
+          {{ if and $.IsFirstLevel .Params.BookFlatSection }} 
+            {{ template "book-menu-group" (dict "Page" . "CurrentPage" $.CurrentPage) }}
+          {{ else }}
+            {{ template "book-menu-link" (dict "Page" . "CurrentPage" $.CurrentPage) }}
+          {{ end }}
           {{ $showChild := false}}
           {{ if $.IsFirstLevel}}
             {{ $showChild = true}}
@@ -27,7 +31,7 @@
         </li>
       {{ else if and .IsPage .Content}}
         <li>
-          {{ template "book-page-link" (dict "Page" . "CurrentPage" $.CurrentPage) }}
+          {{ template "book-menu-link" (dict "Page" . "CurrentPage" $.CurrentPage) }}
         </li>
       {{ end }}
     {{ end }}
@@ -35,14 +39,34 @@
   {{ end }}
 {{ end }}
 
-{{ define "book-page-link" }}{{/* (dict "Page" .Page "CurrentPage" .CurrentPage) */}}
-  {{ if and .Page.Params.bookFlatSection (not .Page.Content) }}
-    <span>{{- partial "docs/title" .Page -}}</span>
-  {{ else }}
-    <a href="{{ .Page.RelPermalink }}" class="
-      {{- if and .Page.IsSection (not .Page.Params.BookFlatSection) .Page.Pages }} collapsed {{ end }}
-      {{- if eq .CurrentPage .Page }}active{{ end }}">
-    {{- partial "docs/title" .Page -}}
+{{ define "book-menu-group" }}
+  <div class="book-menu-group-item">
+    <a {{if .Page.Content}}href="{{ .Page.RelPermalink }}"{{end}} class="
+      book-menu-group-item-inner 
+      {{ if .Page.Content}} hascontent {{ end }}
+      {{ if eq .CurrentPage .Page}} active {{ end }}
+    ">
+      <span class="book-menu-group-item-text">{{- partial "docs/title" .Page -}}</span>
     </a>
-  {{ end }}
+  </div>
+{{ end }}
+
+
+{{ define "book-menu-link" }}{{/* (dict "Page" .Page "CurrentPage" .CurrentPage) */}}
+  <div class="book-menu-item">
+    <a href="{{ .Page.RelPermalink }}" class="
+      book-menu-item-inner 
+      {{- if eq .CurrentPage .Page}} active {{ end }}
+      {{- if and .Page.IsSection (not .Page.Params.BookFlatSection) .Page.Pages }} collapsed {{ end }}
+      {{ if and .Page.IsSection (.Page.IsAncestor $.CurrentPage) }} collapsed-open {{ end }}
+      {{- if eq .CurrentPage .Page}} collapsed-open {{ end }}
+    ">
+    <span class="book-menu-item-text">{{- partial "docs/title" .Page -}}</span>
+    {{- if and .Page.IsSection (not .Page.Params.BookFlatSection) .Page.Pages }}
+    <span class="book-menu-item-icon">
+      {{ partial "svgs/arrow.svg" }}
+    </span>
+    {{ end }}
+    </a>
+  </div>
 {{ end }}

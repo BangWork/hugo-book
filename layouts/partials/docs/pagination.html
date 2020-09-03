@@ -25,7 +25,7 @@
 
 {{ define "partials/is-valid-node" }}
     {{ $isValidNode := true }}
-    {{ if and .IsSection (not .Content) }}
+    {{ if and .IsSection (not .Content) .Params.BookFlatSection }}
         {{ $isValidNode = false}}
     {{ else if eq .Params.bookhidden true}}
         {{ $isValidNode = false}}

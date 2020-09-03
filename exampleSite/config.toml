@@ -48,6 +48,19 @@ enableGitInfo = true
   url = "https://themes.gohugo.io/hugo-book/"
   weight = 20 
 
+[[menu.after]]
+  identifier = "columns"
+  url = "/docs/shortcodes/columns"
+  weight = 5
+
+[[menu.after]]
+  identifier = "buttons"
+  name = "测试"
+  url = "/docs/shortcodes/buttons"
+  parent = "columns"
+  weight = 4
+
+
 [[menu.header]]
   name = "ONES vs Jira"
   url = "https://ones.ai/ones-vs-jira.html"
@@ -64,8 +77,16 @@ enableGitInfo = true
   weight = 3
 
 [[menu.header]]
-  url = "/docs/shortcodes/columns"
+  identifier = "buttons"
+  name = "测试"
+  url = "/docs/shortcodes/buttons"
   weight = 4
+
+[[menu.header]]
+  identifier = "columns"
+  url = "/docs/shortcodes/columns"
+  weight = 5
+
 
 [params]
   # (Optional, default true) Controls table of contents visibility on right side of pages.

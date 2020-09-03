@@ -2,27 +2,69 @@
   This is template for hugo menus, accepts MenuEntity as context
   https://gohugo.io/variables/menus/
 -->
-{{ if . }}
-  {{ template "book-menu-hugo" . }}
+{{ if .Menu }}
+  {{ template "book-menu-hugo" (dict "Entries" .Menu "CurrentPage" .CurrentPage "IsFirstLevel" true) }}
 {{ end }}
 
 {{ define "book-menu-hugo" }}
-<ul>
-  {{ range . }}
-  <li>
-    <a href="{{ .URL }}" {{ if not .Page }}target="_blank" rel="noopener"{{ end }}>
-      {{- .Pre -}}
-      {{ with .Page }}
-        {{ partial "docs/title" .Page }}
-      {{ else }}
-        {{ .Name }}
+  <ul {{ if not .IsFirstLevel }}class="book-hugo-menu-children"{{ end }}>
+    {{ range .Entries }}
+    <li>
+      {{ $page := partial "getPage" (dict "Entry" . "Site" $.CurrentPage.Site) }}
+      {{ if $page }}
+        {{ template "book-hugo-menu-link" (dict "Page" $page "CurrentPage" $.CurrentPage "Entry" .) }}
+      {{ else}}
+        {{ template "book-external-link" .}}
       {{ end }}
-      {{- .Post -}}
+      {{- with .Children }}
+        {{ template "book-menu-hugo" (dict "Entries" . "CurrentPage" $.CurrentPage "IsFirstLevel" false) }}
+      {{- end }}
+    </li>
+    {{ end }}
+  </ul>
+{{ end }}
+
+{{ define "book-external-link" }}
+  <div class="book-menu-item">
+    <a href="{{ .URL }}" class="book-menu-item-inner">
+    {{- .Pre -}}
+    <span class="book-menu-item-text">{{- .Name -}}</span>
+    {{- .Post -}}
     </a>
-    {{- with .Children }}
-      {{ template "book-menu-hugo" . }}
-    {{- end }}
-  </li>
+  </div>
+{{ end }}
+
+{{ define "book-hugo-menu-link" }}{{/* (dict "Page" .Page "CurrentPage" .CurrentPage "Entry" .Entry) */}}
+  <div class="book-menu-item">
+    <a href="{{ .Page.RelPermalink }}" class="book-menu-item-inner
+      {{- if .Entry.Children }} collapsed collapsed-open {{ end }}
+      {{- if eq .CurrentPage .Page }} active {{ end }}">
+      {{- .Entry.Pre -}}
+      <span class="book-menu-item-text">
+        {{ if .Entry.Name }}
+          {{ .Entry.Name }}
+        {{ else }}
+          {{ partial "docs/title" .Page }}
+        {{ end }}
+      </span>
+      {{- .Entry.Post -}}
+      {{- if .Entry.Children }}
+      <span class="book-menu-item-icon">
+        {{ partial "svgs/arrow.svg" }}
+      </span>
+      {{ end }}
+    </a>
+  </div>
+{{ end }}
+
+{{ define "partials/getPage" }}{{/* (dict "Entry" .Entry "Site" .Site) */}}
+  {{ $page := .Entry.Page }}
+  {{ if not $page }}
+    {{ $page = .Site.GetPage .Entry.URL}}
+  {{ else if and .IsSection (not .Content) .Params.BookFlatSection }}
+    {{ $page = false}}
+  {{ else if eq .Params.bookhidden true}}
+      {{ $page = false}}
   {{ end }}
-</ul>
+  {{ return $page }}
 {{ end }}

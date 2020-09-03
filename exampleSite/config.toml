@@ -73,6 +73,9 @@ enableGitInfo = true
   # You can also specify this parameter per page in front matter.
   BookToC = true
 
+  BookExportPDF = false
+
+
   # (Optional, default none) Set the path to a logo for the book. If the logo is
   # /static/logo.png then the path would be logo.png
   BookLogo = 'logo.png'
@@ -92,7 +95,7 @@ enableGitInfo = true
   # (Optional, default docs) Specify root page to render child pages as menu.
   # Page is resoled by .GetPage function: https://gohugo.io/functions/getpage/
   # For backward compatibility you can set '*' to render all sections to menu. Acts same as '/'
-  BookSection = 'docs'
+  BookDefaultSection = 'docs'
 
   # Set source repository location.
   # Used for 'Last Modified' and 'Edit this page' links.

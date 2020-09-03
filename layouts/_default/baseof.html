@@ -29,7 +29,7 @@
             <div class="book-page-title">
               <h1>{{ partial "docs/title" . }}</h1>
             </div>
-              {{ if default true (default true .Params.BookToPDF) }}
+            {{ if default false (default .Site.Params.BookExportPDF .Params.BookExportPDF) }}
             <span class="book-icon-wrapper">
               {{partial "svgs/pdf.svg" .}}
             </span>
@@ -75,6 +75,7 @@
       {{ if default true (default .Site.Params.BookToC .Params.BookToC) }}
       <aside class="book-page-aside">
         <div class="book-page-aside-inner">
+          {{ if default false (default .Site.Params.BookExportPDF .Params.BookExportPDF) }}
           <div class="book-topdf">
             <div class="book-topdf-header">
               <span class="book-icon-wrapper">
@@ -85,9 +86,12 @@
               </span>
             </div>
           </div>
+          {{ end }}
+          {{ if default true (default .Site.Params.BookToC .Params.BookToC) }}
           <div class="book-toc">
             {{ template "toc" . }}
           </div>
+          {{ end }}
           <!-- Table of Contents -->
         </div>
       </aside>

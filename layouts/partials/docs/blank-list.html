@@ -8,7 +8,7 @@
             {{ if not .Params.bookHidden }}
                 <a class="book-card" href="{{.RelPermalink}}">
                     <div class="book-card-title">
-                        {{ .Title }}
+                        {{ partial "docs/title" . }}
                     </div>
                     {{ if .Description }}
                     <div class="book-card-hint">

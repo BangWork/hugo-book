@@ -59,7 +59,6 @@
       {{- if eq .CurrentPage .Page}} active {{ end }}
       {{- if and .Page.IsSection (not .Page.Params.BookFlatSection) .Page.Pages }} collapsed {{ end }}
       {{ if and .Page.IsSection (.Page.IsAncestor $.CurrentPage) }} collapsed-open {{ end }}
-      {{- if eq .CurrentPage .Page}} collapsed-open {{ end }}
     ">
     <span class="book-menu-item-text">{{- partial "docs/title" .Page -}}</span>
     {{- if and .Page.IsSection (not .Page.Params.BookFlatSection) .Page.Pages }}

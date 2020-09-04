@@ -609,10 +609,6 @@ a.book-menu-item-inner:hover,a.book-menu-group-item-inner.hascontent:hover{
   margin: -5px -9px;
   padding: 0px;
   overflow: hidden;
-  .book-toc-header{
-    padding-left:1.5rem;
-    margin-bottom:0.5rem;
-  }
   .book-popover-toc-inner{
     display: block;
     overflow-x: hidden;
@@ -620,15 +616,6 @@ a.book-menu-item-inner:hover,a.book-menu-group-item-inner.hascontent:hover{
     flex: 1 1 0%;
     margin: 0px;
     padding: 0.75rem 0;
-  }
-  nav{
-    padding-left:1.5rem;
-    padding-right:1rem;
-  }
-  a{
-    padding-left:1rem;
-    padding-top:0.25rem;
-    padding-bottom:0.25rem;
   }
 }
 .book-page-aside {
@@ -638,15 +625,10 @@ a.book-menu-item-inner:hover,a.book-menu-group-item-inner.hascontent:hover{
   font-size: $font-size-12;
   nav {
     width: $toc-width;
-    padding: $padding-16;
   }
 
   img {
     height: 1em;
-  }
-
-  nav > ul > li:first-child {
-    margin-top: 0;
   }
 }
 .book-page-aside-inner{
@@ -658,20 +640,21 @@ a.book-menu-item-inner:hover,a.book-menu-group-item-inner.hascontent:hover{
 .book-topdf,.book-toc{
   margin-bottom:1.5rem;
   position:relative;
-  padding:0 16px;
   &:before{
     @include split-line;
     height:100%;
     left:0;
   }
 }
-.book-topdf{
-  padding:4px 16px;
+.book-topdf-header{
+  padding:0.25rem 1rem;
 }
 .book-topdf-header,.book-toc-header{
   display:flex;
   align-items: center;
   color:rgb(157, 170, 182);
+  padding-left:24px;
+  font-size:12px;
   .book-icon-wrapper{
     height:initial;
     width:initial;
@@ -682,8 +665,18 @@ a.book-menu-item-inner:hover,a.book-menu-group-item-inner.hascontent:hover{
     }
   }
 }
-.book-toc,.book-popover-toc{
+.book-toc-header{
+  margin-bottom:0.5rem
+}
+#TableOfContents{
+  ul ul ul{
+    padding-left:1rem;
+  }
   a{
+    padding:0.25rem 1rem 0.25rem 2rem;
+    font-size:12px;
+    line-height:1.5;
+    display: block;
     color:rgb(116, 129, 141);
     &:hover{
       color:rgb(56, 132, 255);
@@ -691,7 +684,6 @@ a.book-menu-item-inner:hover,a.book-menu-group-item-inner.hascontent:hover{
     }
   }
 }
-
 //foot
 .book-footer {
   margin-top:4rem;

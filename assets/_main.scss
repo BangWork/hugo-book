@@ -29,12 +29,12 @@ h2,
 h3,
 h4,
 h5 {
-  font-weight: $body-font-weight;
+  font-weight: 500;
 }
 
 a {
   text-decoration: none;
-  color: $color-link;
+  color: $blue;
 }
 
 img {
@@ -66,18 +66,6 @@ aside nav,
   will-change: transform, margin, opacity;
 }
 
-
-ul.pagination {
-  display: flex;
-  justify-content: center;
-  list-style-type: none;
-
-  .page-item a {
-    padding: $padding-16;
-  }
-}
-
-
 .fixed{
   @include fixed
 }
@@ -85,7 +73,7 @@ ul.pagination {
 //card
 .book-card{
   display:flex;
-  border: 1px solid #E6ECF1;
+  border: 1px solid $border-color;
   margin: 0;
   padding: 0;
   position: relative;
@@ -100,17 +88,17 @@ ul.pagination {
   background-color: #FFFFFF;
   page-break-inside: avoid;
   cursor:pointer;
+  .book-card-body,.book-card-icon{
+    color:inherit;
+  }
   &:hover{
-    color:rgb(56, 132, 255);
-    border-color:rgb(56, 132, 255);
-    .book-card-body,.book-card-icon{
-      color:rgb(56, 132, 255);
-    }
+    color:$blue;
+    border-color:$blue;
   }
 }
 .book-card-icon{
   flex: 0 0 auto;
-  color: #9DAAB6;
+  color: $gray;
   margin: 0;
   display: block;
   padding: 1rem;
@@ -136,7 +124,7 @@ ul.pagination {
   color:$black;
 }
 .book-card-hint{
-  color: #9DAAB6;
+  color: $gray;
   margin: 0;
   display: block;
   padding: 0;
@@ -303,6 +291,11 @@ ul.pagination {
       -webkit-box-align: center;
       
   }
+  a{
+    font-size:$font-size-16;
+    font-weight: 500;
+    line-height: 1.5;
+  }
 }
 
 .book-header-right{
@@ -328,15 +321,15 @@ ul.pagination {
   flex: 0 0 auto;
   width:calc((100% - #{$container-max-width}) / 2 + #{$menu-width});
   padding-left:calc((100% - #{$container-max-width}) / 2);
-  background:#F5F7F9;
+  background:$gray-100;
   min-width: $menu-width;
   font-size: $font-size-14;
   display: flex;
   nav {
     width: $menu-width;
     padding: 2rem 0 $padding-16;
-    background:#F5F7F9;
-    border-right:1px solid #E6ECF1;
+    background:$gray-100;
+    border-right:1px solid $border-color;
     overflow:auto;
     display:flex;
     flex-direction: column;
@@ -387,11 +380,12 @@ ul.pagination {
 }
 
 .book-menu-group-item{
-  color:#9DAAB6;
+  color:$gray;
   font-size:14px;
 }
 .book-menu-item{
   display:block;
+  color:$menu-color;
 }
 a.book-menu-item-inner,a.book-menu-group-item-inner{
   border:1px solid transparent;
@@ -401,7 +395,7 @@ a.book-menu-item-inner,a.book-menu-group-item-inner{
   word-wrap: break-word;
   color:inherit;
   &.active{
-    color:rgb(56, 132, 255);
+    color:$blue;
     background:#fff;
     border-color:rgb(230, 236, 241);
   }
@@ -421,7 +415,7 @@ a.book-menu-item-inner:hover,a.book-menu-group-item-inner.hascontent:hover{
   word-break: break-word;
 }
 .book-menu-item-icon{
-  color: #9DAAB6;
+  color: $gray;
   cursor: pointer;
   margin: -0.5rem;
   display: block;
@@ -449,7 +443,7 @@ a.book-menu-item-inner:hover,a.book-menu-group-item-inner.hascontent:hover{
 
 .book-page-header{
   padding:2.5rem 0;
-  border-bottom: 2px solid #E6ECF1;
+  border-bottom: 2px solid $border-color;
   margin:0 auto 2rem;
 }
 .book-page-title-container{
@@ -466,6 +460,7 @@ a.book-menu-item-inner:hover,a.book-menu-group-item-inner.hascontent:hover{
   display:block;
   h1{
     margin:0;
+    line-height:1.5
   }
 }
 .book-page-description{
@@ -482,6 +477,8 @@ a.book-menu-item-inner:hover,a.book-menu-group-item-inner.hascontent:hover{
   overflow-x: hidden;
   border-radius: 3px;
   letter-spacing: 0.0em;
+  font-size:$font-size-16;
+  line-height:1.625;
 }
 
 
@@ -586,12 +583,15 @@ a.book-menu-item-inner:hover,a.book-menu-group-item-inner.hascontent:hover{
     color:$black;
     display: flex;
     align-items: center;
+    font-size:16px;
+    font-weight:500;
+    line-height:1.5;
     .left-line{
       height: 24px;
       display: block;
       margin: 0px 8px 0px 0px;
       padding: 0px;
-      border-left: 2px solid rgb(56, 132, 255);
+      border-left: 2px solid $blue;
     }
     &:hover{
       opacity: 1;
@@ -654,7 +654,10 @@ a.book-menu-item-inner:hover,a.book-menu-group-item-inner.hascontent:hover{
   align-items: center;
   color:rgb(157, 170, 182);
   padding-left:24px;
-  font-size:12px;
+  font-size:10px;
+  font-weight:700;
+  line-height:1;
+  letter-spacing: 1.2px;
   .book-icon-wrapper{
     height:initial;
     width:initial;
@@ -678,8 +681,9 @@ a.book-menu-item-inner:hover,a.book-menu-group-item-inner.hascontent:hover{
     line-height:1.5;
     display: block;
     color:rgb(116, 129, 141);
+    font-weight: 500;
     &:hover{
-      color:rgb(56, 132, 255);
+      color:$blue;
       opacity: 1;
     }
   }
@@ -698,7 +702,7 @@ a.book-menu-item-inner:hover,a.book-menu-group-item-inner.hascontent:hover{
 .book-footer-external{
   margin: 0;
   padding: 0;
-  border-top: 2px solid #E6ECF1;
+  border-top: 2px solid $border-color;
   margin-top: 1.5rem;
   padding-top: 1.5rem;
 }
@@ -741,7 +745,7 @@ a.book-menu-item-inner:hover,a.book-menu-group-item-inner.hascontent:hover{
     }
     &:hover{
       text-decoration: none;
-      color:rgb(56, 132, 255);
+      color:$blue;
     }
   }
   .book-card-title{

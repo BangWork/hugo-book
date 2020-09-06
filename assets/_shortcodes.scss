@@ -4,7 +4,7 @@
     margin-top: $padding-16;
     margin-bottom: $padding-16;
 
-    border: $padding-1 solid $gray-200;
+    border: $padding-1 solid $gray;
     border-radius: $border-radius;
 
     overflow: hidden;
@@ -30,7 +30,7 @@
     margin-top: $padding-16;
     margin-bottom: $padding-16;
 
-    border: $padding-1 solid $gray-200;
+    border: $padding-1 solid $border-color;
     border-radius: $border-radius;
 
     overflow: hidden;
@@ -54,7 +54,7 @@
     }
 
     input[type="radio"]:checked + label {
-      border-bottom: $padding-1 solid $color-link;
+      border-bottom: $padding-1 solid $blue;
     }
     input[type="radio"]:checked + label + .book-tabs-content {
       display: block;
@@ -80,10 +80,10 @@
   a.book-btn {
     display: inline-block;
     font-size: $font-size-14;
-    color: $color-link;
+    color: $blue;
     line-height: $padding-16 * 2;
     padding: 0 $padding-16;
-    border: $padding-1 solid $color-link;
+    border: $padding-1 solid $blue;
     border-radius: $border-radius;
     cursor: pointer;
 
@@ -93,7 +93,10 @@
   }
 
   // {{< hint >}}
-  .book-hint {
+  blockquote.book-hint {
+    padding:1rem 1.5rem;
+    margin:2rem 0;
+    border-radius: $border-radius;
     @each $name, $color in $hint-colors {
       &.#{$name} {
         border-color: $color;
@@ -103,8 +106,8 @@
   }
   a.book-page-ref{
     display:flex;
-    color:rgb(56, 132, 255);
-    border: 1px solid #E6ECF1;
+    color:$blue;
+    border: 1px solid $border-color;
     margin: 2rem 0;
     padding: 0;
     position: relative;
@@ -125,15 +128,15 @@
     }
     &:hover{
       text-decoration: none;
-      color:rgb(56, 132, 255);
-      border-color:rgb(56, 132, 255);
+      color:$blue;
+      border-color:$blue;
       svg{
-        color:rgb(56, 132, 255);
+        color:$blue;
       }
     }
     .book-page-ref-icon{
       flex: 0 0 auto;
-      color: rgb(56, 132, 255);
+      color: $blue;
       margin: 0;
       display: block;
       padding: 1rem 0 1rem 1rem;
@@ -153,13 +156,13 @@
       flex: 1;
       margin: 0;
       display: block;
-      color: rgb(56, 132, 255);
+      color: $blue;
       padding: 1rem;
     }
     .book-page-ref-url{
       flex: 0 0 auto;
       margin: 0;
-      color: #9DAAB6;
+      color: $gray;
       display: block;
       padding: 16px;
       max-width: 40%;

@@ -9,12 +9,12 @@ $font-size-12: 0.75rem !default;
 $font-size-14: 0.875rem !default;
 $font-size-16: 1rem !default;
 
-$border-radius: $padding-4 !default;
+$border-radius: 3px !default;
+$font-family:Content-font, Roboto, sans-serif;
 
 // Grayscale
 $white: #ffffff !default;
-$gray-100: #f8f9fa !default;
-$gray-200: #e9ecef !default;
+$gray-100: #F5F7F9 !default;
 $gray-300: #dee2e6 !default;
 $gray-400: #ced4da !default;
 $gray-500: #adb5bd !default;
@@ -22,10 +22,11 @@ $gray-600: #868e96 !default;
 $gray-700: #495057 !default;
 $gray-800: #343a40 !default;
 $gray-900: #212529 !default;
-$black: #000 !default;
-
-$color-link: #05b !default;
-$color-visited-link: #8440f1 !default;
+$black: #242A31 !default;
+$blue:rgb(56, 132, 255) !default;
+$gray:#9DAAB6;
+$border-color:#E6ECF1;
+$menu-color:#3B454E;
 
 $body-background: white !default;
 $body-font-color: $black !default;
@@ -36,7 +37,7 @@ $body-min-width: 20rem !default;
 $page-max-width: 46.5rem !default;
 
 $header-height: 3.5rem !default;
-$menu-width: 18rem !default;
+$menu-width: 18.75rem !default;
 $toc-width: 14rem !default;
 $search-width: 20rem !default;
 
@@ -48,7 +49,8 @@ $container-max-width:90.5rem !default;
 $hint-colors: (
   info: #6bf,
   warning: #fd6,
-  danger: #f66
+  danger: #f66,
+  success: rgb(38, 203, 124),
 ) !default;
 
 $icon-filter: none !default;

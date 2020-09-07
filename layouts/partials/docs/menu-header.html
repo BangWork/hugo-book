@@ -5,13 +5,11 @@
 {{ $currentPage := .}}
 {{ if .Site.Menus.header }}
   <ul>
+    {{ $activePage := partial "get-active-page" (dict "Menu" .Site.Menus.header "CurrentPage" $currentPage)}}
     {{ range .Site.Menus.header }}
-    <li>
-      {{ $page := .Page }}
-      {{ if not $page }}
-        {{ $page = $.Site.GetPage .URL }}
-      {{ end }}
-      <a href="{{ .URL }}" class='{{ if eq $currentPage $page }}active{{ end }}' {{ if or (not $page) (ne $page.Section $currentPage.Section) }}target="_blank" rel="noopener"{{ end }}>
+    {{ $page := partial "get-page-by-menu" (dict "MenuEntry" . "Site" $currentPage.Site )}}
+    <li class='{{ if eq $activePage $page }}active{{ end }}'>
+      <a href="{{ .URL }}"  {{ if or (not $page) (ne $page.Section $currentPage.Section) }}target="_blank" rel="noopener"{{ end }}>
         {{- .Pre -}}
         {{ if .Name }}
           {{ .Name }}
@@ -23,4 +21,30 @@
     </li>
     {{ end }}
   </ul>
+{{ end }}
+
+
+{{ define "partials/get-active-page" }}
+  {{ $activePage := false }}
+  {{ range .Menu }}
+    {{ $page := partial "get-page-by-menu" (dict "MenuEntry" . "Site" $.CurrentPage.Site )}}
+    {{  if and $page.IsSection ($page.IsAncestor $.CurrentPage) }}
+      {{ if $activePage }}
+        {{ if $activePage.IsAncestor $page}}
+          {{ $activePage = $page }}
+        {{ end }}
+      {{ else }}
+        {{ $activePage = $page }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+  {{ return $activePage }}
+{{ end }}
+
+{{ define "partials/get-page-by-menu" }}
+  {{ $page := .MenuEntry.Page }}
+  {{ if not $page }}
+    {{ $page = .Site.GetPage .MenuEntry.URL }}
+  {{ end }}
+  {{ return $page }}
 {{ end }}

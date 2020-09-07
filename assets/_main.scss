@@ -289,7 +289,9 @@ aside nav,
       white-space: nowrap;
       border-bottom: 3px solid transparent;
       -webkit-box-align: center;
-      
+      &.active{
+        border-bottom-color:$blue;
+      }
   }
   a{
     font-size:$font-size-16;

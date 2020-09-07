@@ -136,16 +136,12 @@
     }
     tr th,
     tr td {
-      padding: $padding-8 $padding-16;
+      padding: $padding-8;
       border-bottom: 1px solid $border-color;
     }
     tr th{
       border-bottom-width: 2px;
       color:$gray;
-    }
-
-    tr:nth-child(2n) {
-      background: $gray-100;
     }
   }
 

@@ -713,7 +713,16 @@ a.book-menu-item-inner:hover,a.book-menu-group-item-inner.hascontent:hover{
   grid-column-gap: 24px;
   grid-template-rows: auto;
   grid-template-areas: "previous next";
-  grid-template-columns: 1fr 1fr
+  grid-template-columns: 1fr 1fr;
+  a{
+    color:$black;
+    &:hover .book-card-icon{
+      color:$blue;
+    }
+  }
+  .book-card-icon{
+    color:$gray;
+  }
 }
 .book-page-navgation-inner.book-page-unique{
   grid-row-gap: 24px;

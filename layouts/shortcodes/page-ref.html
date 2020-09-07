@@ -1,13 +1,14 @@
+{{ $page := .Site.GetPage  (.Get "href")}}
+{{ if $page}}
 <a class="book-page-ref" href="{{.Get `href`}}">
     <div class="book-page-ref-icon">
         {{partial "svgs/search-close.svg"}}
     </div>
-    {{ with .Site.GetPage  (.Get "href")}}
     <div class="book-page-ref-title">
-        {{ .Title }}
+        {{ $page.Title }}
     </div>
     <div class="book-page-ref-url">
-        {{ .RelPermalink}}
+        {{ $page.RelPermalink }}
     </div>
-    {{ end }}
 </a>
+{{ end }}

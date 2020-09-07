@@ -12,6 +12,11 @@
         changeMenuHeight()
         tippy.hideAll()
     })
+
+    addEventListener("beforeunload", function(event) {
+        localStorage.setItem("menu.scrollTop", menu.scrollTop);
+    });
+
     tippy("[for='toc-control']", {
         content: document.querySelector("#tocPopover").innerHTML,
         appendTo: () => document.body,
@@ -51,5 +56,8 @@
                 toc.classList.remove("fixed")
             }
         }
+        setTimeout(function(){
+            menu.scrollTop = localStorage.getItem("menu.scrollTop");
+        },0)
     }
 }())

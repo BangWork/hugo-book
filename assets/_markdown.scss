@@ -89,8 +89,23 @@
   }
 
   img {
-    max-width: 100%;
+    display:inline-block;
+    padding:3px;
+    max-width: 300px;
+    vertical-align: middle;
   }
+  figure{
+    img{
+      max-width:100%;
+      padding:0;
+    }
+  }
+  h1,h2,h3,h4,h5,h6,li,a{
+    img{
+      height:1.5rem;
+    }
+  }
+  
 
   code {
     padding: 0 $padding-4;
@@ -177,15 +192,6 @@
     td:nth-child(2) pre {
       margin: 0;
       padding-inline-start: 0;
-    }
-  }
-  h1,h2,h3,h4,h5,h6,li,a{
-    img{
-      height:1.875rem;
-      display:inline-block;
-      padding:3px;
-      max-width: 300px;
-      vertical-align: middle;
     }
   }
 

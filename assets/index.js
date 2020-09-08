@@ -42,7 +42,6 @@
         toc.style.height = (bodyHeight - headerHeight + window.pageYOffset)+"px"
     }
     function changeMenuHeight(){
-        console.log("change menu height")
         var bodyRect = document.body.getBoundingClientRect();
         var headerHeight = document.querySelector(".book-header").getBoundingClientRect()["height"]
         if(bodyRect.width < 1024){

@@ -1,10 +1,11 @@
 (function () {
     var menu = document.querySelector("aside.book-menu nav")
     var toc = document.querySelector(".book-page-aside-inner")
+
     if (document.readyState === 'complete') {
-        changeMenuHeight();
+        domReady();
     } else {
-        document.addEventListener("DOMContentLoaded", changeMenuHeight);
+        document.addEventListener("DOMContentLoaded", domReady);
     }
     addEventListener("resize",changeMenuHeight)
 
@@ -41,23 +42,29 @@
         toc.style.height = (bodyHeight - headerHeight + window.pageYOffset)+"px"
     }
     function changeMenuHeight(){
+        console.log("change menu height")
         var bodyRect = document.body.getBoundingClientRect();
         var headerHeight = document.querySelector(".book-header").getBoundingClientRect()["height"]
         if(bodyRect.width < 1024){
             unsetHeight()
         }else{
             if (window.pageYOffset > 80) {
-                unsetHeight()
-                menu.classList.add("fixed")
-                toc.classList.add("fixed")
+                if(!menu.classList.contains("fixed")){
+                    unsetHeight()
+                    menu.classList.add("fixed")
+                    toc.classList.add("fixed")
+                }
             } else {
                 setHeightToFit(bodyRect.height,headerHeight)
-                menu.classList.remove("fixed")
-                toc.classList.remove("fixed")
+                if(menu.classList.contains("fixed")){    
+                    menu.classList.remove("fixed")
+                    toc.classList.remove("fixed")
+                }
             }
         }
-        setTimeout(function(){
-            menu.scrollTop = localStorage.getItem("menu.scrollTop");
-        },0)
+    }
+    function domReady(){
+        changeMenuHeight();
+        menu.scrollTop = localStorage.getItem("menu.scrollTop");
     }
 }())

@@ -96,8 +96,17 @@
   }
   figure{
     margin: 2rem 0;
-    figcaption p {
+    figcaption{
       margin-top: 0;
+      & *{
+        color: rgb(157, 170, 182);
+        margin: 0px;
+        padding: 8px 0px;
+        overflow: hidden;
+        word-break: normal;
+        font-weight: 400;
+        text-align:center;
+      }
     }
     img{
       max-width:100%;

@@ -8,6 +8,12 @@
 - id: BlankHint
   translation: 以下是本节中的文章
 
+- id: ExportSpace
+  translation: 导出所有页面
+
+- id: ExportPage
+  translation: 导出当前页面
+
 - id: Topdf
   translation: 导出为 PDF
 

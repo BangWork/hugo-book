@@ -604,14 +604,14 @@ a.book-menu-item-inner:hover,a.book-menu-group-item-inner.hascontent:hover{
 
 
 //toc
-.book-popover-toc{
+.book-popover-toc,.book-topdf-popover{
   max-width: 260px;
   min-width: 224px;
   max-height: 233px;
   margin: -5px -9px;
   padding: 0px;
   overflow: hidden;
-  .book-popover-toc-inner{
+  .book-popover-toc-inner,.book-topdf-popover-inner{
     display: block;
     overflow-x: hidden;
     overflow-y: overlay;
@@ -631,6 +631,12 @@ a.book-menu-item-inner:hover,a.book-menu-group-item-inner.hascontent:hover{
 
   img {
     height: 1em;
+  }
+  .book-topdf-header{
+    cursor:pointer;
+    &:hover{
+      color:$blue;
+    }
   }
 }
 .book-page-aside-inner{
@@ -844,6 +850,22 @@ a.book-menu-item-inner:hover,a.book-menu-group-item-inner.hascontent:hover{
 .book-home {
   padding: $padding-16;
 }
+.book-pdf-exports{
+  list-style: none;
+  margin:0;
+  padding:0;
+  a{
+    padding: .25rem 1rem .25rem 2rem;
+    font-size: 12px;
+    line-height: 1.5;
+    display: block;
+    color: #74818d;
+    font-weight: 500;
+    &:hover{
+      color:$blue;
+    }
+  }
+}
 
 
 
@@ -970,9 +992,15 @@ a.book-menu-item-inner:hover,a.book-menu-group-item-inner.hascontent:hover{
   aside.book-page-aside{
     display:block;
   }
+  .book-topdf-popover{
+    .book-topdf-header{
+      display:none;
+    }
+  }
   .book-page-title-container{
     .book-icon-wrapper{
       display:none;
     }
   }
 }
+

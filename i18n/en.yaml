@@ -10,6 +10,12 @@
 - id: BlankHint
   translation: Here are the articles in this section
 
+- id: ExportSpace
+  translation: Export all pages
+
+- id: ExportPage
+  translation: Export current page
+
 - id: Edit this page
   translation: Edit this page
 

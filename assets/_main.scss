@@ -497,6 +497,29 @@ a.book-menu-item-inner:hover,a.book-menu-group-item-inner.hascontent:hover{
   right: 0;
   z-index:2;
 }
+.book-zoom-container{
+  position: fixed;
+  background:$white;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index:2;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  transition: opacity 250ms ease-in-out;
+  &.hidden{
+    display:none;
+    opacity: 0;
+  }
+  img{
+    max-height:100%;
+    max-width: 100%;
+    cursor: zoom-out;
+  }
+}
 
 
 

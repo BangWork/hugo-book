@@ -1,6 +1,7 @@
 (function () {
     var menu = document.querySelector("aside.book-menu nav")
     var toc = document.querySelector(".book-page-aside-inner")
+    var zoomContainer = document.querySelector(".book-zoom-container");
 
     if (document.readyState === 'complete') {
         domReady();
@@ -12,6 +13,22 @@
     addEventListener("scroll", function (event) {
         changeMenuHeight()
         tippy.hideAll()
+        hiddenZoom();
+    })
+    
+    addEventListener("click",function(event){
+        var target = event.target;
+        if(!target || target.tagName.toLowerCase() !== "img"){
+            return;
+        }
+        if(!target.parentNode || target.parentNode.tagName.toLowerCase() !== "figure"){
+            return;
+        }
+        var cloneImage = target.cloneNode();
+        zoomImage(cloneImage)
+    })
+    zoomContainer.addEventListener("click", function(event){
+        hiddenZoom();
     })
 
     addEventListener("beforeunload", function(event) {
@@ -45,6 +62,29 @@
         var searchControl = document.querySelector("#search-control");
         searchControl.checked = true;
     })
+
+    function removeZoomImage(){
+        var childLength = zoomContainer.childNodes.length;
+        if(childLength){
+            zoomContainer.removeChild(zoomContainer.childNodes[0])
+        }
+    }
+
+    function hiddenZoom(){
+        removeZoomImage()
+        if(!zoomContainer.classList.contains("hidden")){
+            zoomContainer.classList.add("hidden")
+        }
+    }
+    function zoomImage(cloneImage){
+        removeZoomImage();
+        zoomContainer.appendChild(cloneImage);
+        if(zoomContainer.classList.contains("hidden")){
+            zoomContainer.classList.remove("hidden")
+        }
+    }    
+
+
     function unsetHeight(){
         menu.style.height = "unset"
         toc.style.height = "unset"

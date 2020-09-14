@@ -18,7 +18,7 @@
 <!-- Theme stylesheet, you can customize scss by creating `assets/custom.scss` in your website -->
 {{- $postcssOptions := (dict "config" "./assets/postcss.config.js") }}
 
-{{- $styles := resources.Get "book.scss" | resources.ExecuteAsTemplate "book.scss" . | resources.ToCSS | resources.PostCSS | resources.Minify | resources.Fingerprint }}
+{{- $styles := resources.Get "book.scss" | resources.ExecuteAsTemplate "book.scss" . | resources.ToCSS | resources.PostCSS (dict "config" "assets/postcss.config.js") | resources.Minify | resources.Fingerprint }}
 <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}">
 
 {{- $styles := resources.Get "tippy-light.css" | resources.ExecuteAsTemplate "tippy-light.css" . | resources.Fingerprint }}

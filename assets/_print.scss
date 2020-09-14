@@ -25,4 +25,25 @@
   .book-blank{
     display:none;
   }
+  
+  .markdown{
+    .book-tabs{
+      display:block;
+      border:none;
+      .book-tabs-content{
+        display:block;
+        border:1px solid $border-color;
+        margin-bottom:2rem;
+        border-radius: 0 $border-radius $border-radius $border-radius;
+      }
+      input[type=radio]:checked+label{
+        border-bottom:none;
+      }
+      label{
+        border:1px solid $border-color;
+        border-radius: $border-radius $border-radius 0 0;
+        border-bottom:none;
+      }
+    }
+  }
 }

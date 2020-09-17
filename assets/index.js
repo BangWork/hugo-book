@@ -45,17 +45,19 @@
         placement: "bottom-end",
         offset:[16, 0]
     })
-
-    tippy("[for='pdf-control']", {
-        content: document.querySelector("#exportPDFPopover").innerHTML,
-        appendTo: () => document.body,
-        allowHTML: true,
-        trigger: 'click',
-        interactive: true,
-        theme: "light-border",
-        placement: "bottom-end",
-        offset:[16, 0]
-    })
+    var pdfPopover =document.querySelector("#exportPDFPopover");
+    if(pdfPopover){
+        tippy("[for='pdf-control']", {
+            content: document.querySelector("#exportPDFPopover").innerHTML,
+            appendTo: () => document.body,
+            allowHTML: true,
+            triggeor: 'click',
+            interactive: true,
+            theme: "light-border",
+            placement: "bottom-end",
+            offset:[16, 0]
+        })
+    }
 
     var headerSearchInput = document.querySelector(".book-header input");
     headerSearchInput.addEventListener("focus", function () {

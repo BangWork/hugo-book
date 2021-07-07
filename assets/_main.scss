@@ -366,7 +366,11 @@ aside nav,
   }
 }
 .book-section-flat {
+  margin-top: 1.5rem;
   margin-bottom:1.5rem;
+  &:first-child {
+    margin-top: 0;
+  }
   &:last-child{
     margin-bottom:0;
   }
